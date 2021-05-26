@@ -1,2 +1,2 @@
  # Title: Uptime Monitoring Application
- Description: A Restful API to monitor up or down time of user defined links
+ Description: A Pure Nodejs Restful API to monitor up or down time of user defined links
