@@ -2,13 +2,30 @@
 	"name": "utma",
 	"version": "1.0.0",
 	"description": "Uptime Monitoring Application using pure node js.",
-	"main": "app.js",
+	"main": "./server/app.js",
 	"scripts": {
-		"start": "nodemon app",
+		"start": "yarn run prod",
+		"server": "node ./dist-server/app",
+		"transpile": "babel ./server --out-dir dist-server",
+		"clean": "rimraf dist-server",
+		"build": "yarn-run-all clean transpile",
+		"dev": "SET NODE_ENV=development yarn-run-all build server",
+		"prod": "SET NODE_ENV=production yarn-run-all build server",
+		"watch:dev": "nodemon",
 		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"nodemonConfig": { 
+		"exec": "yarn run dev",
+		"watch": ["server/*", "public/*"],
+		"ignore": ["**/__tests__/**", "*.test.js", "*.spec.js"]
 	},
 	"author": "abid",
 	"license": "ISC",
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		]
+	},
 	"devDependencies": {
 		"eslint": "7.2.0",
 		"eslint-config-airbnb-base": "14.2.1",
@@ -16,5 +33,13 @@
 		"eslint-plugin-import": "^2.22.1",
 		"eslint-plugin-prettier": "^3.2.0",
 		"prettier": "^2.2.1"
+	},
+	"dependencies": {
+		"@babel/cli": "^7.15.7",
+		"@babel/core": "^7.15.5",
+		"@babel/preset-env": "^7.15.6",
+		"nodemon": "^2.0.13",
+		"rimraf": "^3.0.2",
+		"yarn-run-all": "^3.1.1"
 	}
 }

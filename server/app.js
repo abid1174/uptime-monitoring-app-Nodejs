@@ -6,8 +6,8 @@
  */
 
 // Dependencies
-const http = require('http');
-const { handleReqRes } = require('./helpers/handleReqRes');
+import http from 'http';
+import { handleReqRes } from './helpers/handleReqRes';
 
 // App object - module scaffolding
 const app = {};
@@ -21,8 +21,11 @@ app.config = {
 app.createServer = () => {
   const server = http.createServer(handleReqRes);
   server.listen(app.config.port, () => {
-    console.log(`listening on port ${app.config.port}`);
+    console.log(`awesome! server is listening on port ${app.config.port}`);
   });
 };
 // start the server
 app.createServer();
+
+
+export default app;

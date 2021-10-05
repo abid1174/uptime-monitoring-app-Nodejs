@@ -2,16 +2,19 @@
  * Title: Handle Request Response
  * Description: Handle API request and response
  * Author: Abid Al Amin
- * Date: 08 Dec, 2020
+ * Date: 04 Oct, 2021
  */
+
+
 // Dependencies
-const url = require('url');
-const { StringDecoder } = require('string_decoder');
+import { StringDecoder } from "string_decoder";
+import url from 'url';
 
 // handler object - module scaffolding
-const handler = {};
+const reqResHandler = {};
 
-handler.handleReqRes = (req, res) => {
+reqResHandler.handleReqRes = (req, res) => {
+  console.log("listening")
   // handle request
   // get the url and parse it
   const parsedUrlObject = url.parse(req.url, true);
@@ -32,9 +35,6 @@ handler.handleReqRes = (req, res) => {
     res.end('Hello World');
   });
 
-  // console.log(parsedUrlObject);
-  // console.log(headerObject);
-  // handle response
 };
 
-module.exports = handler;
+export default reqResHandler;
