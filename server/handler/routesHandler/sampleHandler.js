@@ -8,8 +8,12 @@
 // scaffolding
 const sampleHandler = {};
 
-sampleHandler.handle = () => {
-    console.log("sample handler")
+sampleHandler.handle = (request, callback) => {
+
+    callback(200, {
+        message: "this is a sample url",
+        status: true,
+    })
 }
 
-export default sampleHandler;
+module.exports = sampleHandler;

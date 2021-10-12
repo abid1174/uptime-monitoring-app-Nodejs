@@ -3,22 +3,14 @@
 	"version": "1.0.0",
 	"description": "Uptime Monitoring Application using pure node js.",
 	"main": "./server/app.js",
+	
 	"scripts": {
 		"start": "yarn run prod",
-		"server": "node ./dist-server/app",
-		"transpile": "babel ./server --out-dir dist-server",
-		"clean": "rimraf dist-server",
-		"build": "yarn-run-all clean transpile",
-		"dev": "SET NODE_ENV=development yarn-run-all build server",
-		"prod": "SET NODE_ENV=production yarn-run-all build server",
-		"watch:dev": "nodemon",
+		"dev": "SET NODE_ENV=development && nodemon server/app",
+		"prod": "SET NODE_ENV=production && nodemon server/app",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"nodemonConfig": { 
-		"exec": "yarn run dev",
-		"watch": ["server/*", "public/*"],
-		"ignore": ["**/__tests__/**", "*.test.js", "*.spec.js"]
-	},
+	
 	"author": "abid",
 	"license": "ISC",
 	"babel": {

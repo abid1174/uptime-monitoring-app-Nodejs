@@ -6,26 +6,33 @@
  */
 
 // Dependencies
-import http from 'http';
-import { handleReqRes } from './helpers/handleReqRes';
+const http = require('http');
+const reqResHandler =  require('./handler/reqResHandler/handleReqRes');
+const environment = require('./lib/environments');
+const db = require('./lib/data');
+
+const data = {
+  name: "ashmira",
+  country: "bangladesh",
+  nationality: "bangladeshi"
+}
+db.updateData('test', "testfile", data,  (err) => {
+  console.log(err);
+})
 
 // App object - module scaffolding
 const app = {};
 
 // Configuration
-app.config = {
-  port: 3000,
-};
+app.config = {};
 
 // Create Server
 app.createServer = () => {
-  const server = http.createServer(handleReqRes);
-  server.listen(app.config.port, () => {
-    console.log(`awesome! server is listening on port ${app.config.port}`);
+  const server = http.createServer(reqResHandler.handleReqRes);
+  server.listen(environment.port, () => {
+    console.log(`server is listening on port ${environment.port}`);
   });
 };
 // start the server
 app.createServer();
 
-
-export default app;
