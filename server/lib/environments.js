@@ -9,12 +9,14 @@ const environments = {};
 
 environments['staging'] = {
     port: 3000,
-    envName: "staging"
+    envName: "staging",
+    secretKey: "THISISASECRETKEYFORSTAGING",
 }
 
 environments['production'] = {
     port: 8000,
-    envName: "production"
+    envName: "production",
+    secretKey: "THISISASECRETKEYFORPRODUCTION",
 }
 
 const currentEnvName = 

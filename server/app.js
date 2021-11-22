@@ -9,16 +9,7 @@
 const http = require('http');
 const reqResHandler =  require('./handler/reqResHandler/handleReqRes');
 const environment = require('./lib/environments');
-const db = require('./lib/data');
-
-const data = {
-  name: "ashmira",
-  country: "bangladesh",
-  nationality: "bangladeshi"
-}
-db.updateData('test', "testfile", data,  (err) => {
-  console.log(err);
-})
+const db = require('./lib/db');
 
 // App object - module scaffolding
 const app = {};

@@ -17,10 +17,10 @@ const db = {};
 db.baseDir = path.join(__dirname, '../../.data/')
 
 
-// write data to file
-db.saveData = (folder = "", file, data, callback) => {
+//*******  write data to file  *******/ 
+db.write = (folder = "", fileName, data, callback) => {
     // open file for writing
-    const filePath = db.baseDir + folder + "/"+ file + ".json";
+    const filePath = db.baseDir + folder + "/"+ fileName + ".json";
     fs.open(filePath, 'wx', (openError, fd) => {
         if(!openError && fd) {
             // convert data to string
@@ -49,16 +49,17 @@ db.saveData = (folder = "", file, data, callback) => {
     })
 }
 
-// Read data from file
-db.readData = (folder = "", file, callback) => {
-    const filePath = db.baseDir + folder +"/"+ file + ".json";
+//*******  read data from file  *******/ 
+db.read = (folder = "", fileName, callback) => {
+    const filePath = db.baseDir + folder +"/"+ fileName + ".json";
     fs.readFile(filePath, "utf8", (err, data) => {
         callback(err, data)
     })
 }
 
-db.updateData = (folder = "", file, data, callback) => {
-    const filePath = db.baseDir + folder +"/"+ file + ".json";
+//*******  update data to file  *******/ 
+db.update = (folder = "", fileName, data, callback) => {
+    const filePath = db.baseDir + folder +"/"+ fileName + ".json";
     fs.open(filePath, "r+", (openErr, fd) => {
         if(!openErr && fd) {
            const stringData = JSON.stringify(data);
@@ -99,8 +100,9 @@ db.updateData = (folder = "", file, data, callback) => {
     })  
 }
 
-db.deleteData = (folder = "", file, callback) => {
-    const filePath = db.baseDir + folder +"/"+ file + ".json";
+//******* delete data from file  *******/ 
+db.delete = (folder = "", fileName, callback) => {
+    const filePath = db.baseDir + folder +"/"+ fileName + ".json";
     fs.unlink(filePath, (deleteErr) => {
         if(deleteErr) {
             console.log("Error deleting file");
@@ -113,4 +115,3 @@ db.deleteData = (folder = "", file, callback) => {
 }
 
 module.exports = db;
-

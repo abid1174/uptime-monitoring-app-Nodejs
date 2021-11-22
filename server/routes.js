@@ -7,9 +7,13 @@
 
 // dependencies
 const sampleHandler = require('./handler/routesHandler/sampleHandler');
+const userHandler = require('./handler/routesHandler/userHandler');
+const tokenHandler = require('./handler/routesHandler/tokenHandler');
 
 const routes = {
-    'sample': sampleHandler
+    'sample': sampleHandler,
+    'user': userHandler,
+    'token': tokenHandler,
 }
 
 module.exports = routes;

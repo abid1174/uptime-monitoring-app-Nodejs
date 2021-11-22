@@ -13,6 +13,7 @@ const url = require('url');
 // Local Dependencies
 const routes = require('../../routes');
 const notFoundHandler =  require("../routesHandler/notFoundHandler");
+const { parseJSON } = require("../../lib/utilities");
 
 
 // handler object - module scaffolding
@@ -52,7 +53,24 @@ reqResHandler.handleReqRes = (req, res) => {
   // Request data collection done
   req.on('end', () => {
     bodyData += decoder.end();
-    
+  
+    try {
+      if(bodyData) {
+        requestObject.body = JSON.parse(bodyData);
+      }
+      else {
+        requestObject.body = null;
+      }
+      
+    }
+    catch(err) {
+      let payload = {
+        message: "Error loading json data!",
+        status: false
+      }
+      res.writeHead(500);
+      res.end(JSON.stringify(payload))
+    }
 
     choosenHandler.handle(requestObject, (statusCode, payload) => {
       statusCode = typeof(statusCode) === 'number' ? statusCode : 500;
@@ -60,11 +78,10 @@ reqResHandler.handleReqRes = (req, res) => {
   
       const payloadString = JSON.stringify(payload);
   
+      res.setHeader('Content-Type', "application/json");
       res.writeHead(statusCode);
       res.end(payloadString);
     })
-
-    res.end('Hello World');
   });
 
 };
